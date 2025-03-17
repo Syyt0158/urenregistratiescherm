@@ -8,3 +8,145 @@
 hr {
     margin-top: 50px;
 }
+
+/* Tabelstijl */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.klant {
+    font-weight: bold;
+    text-align: left;
+    background-color: #f4f4f4;
+    padding-left: 10px;
+    width: 200px;
+}
+
+.project {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Invoervelden */
+input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+tbody {
+    background-color: #f9f9f9;
+}
+
+/* Week selector container */
+.week-selector {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+/* Stijl van de knop */
+.dropdown-btn {
+    background-color: #fff;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dropdown-btn:hover {
+    background-color: #e08722;
+
+}
+
+/* Pijlstijl */
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+/* Gedraaide pijl als open */
+.rotate {
+    transform: rotate(180deg);
+}
+
+/* Dropdown-menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 120px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Scrollbalk */
+.dropdown-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
+
+.dropdown-content li {
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.dropdown-content li:hover {
+    background-color: #f4f4f4;
+}
+
+/* Laat de dropdown zien*/
+.show {
+    display: block;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* Ruimte tussen de knop en de tabel */
+}
+
+.btn-go-today {
+    padding: 10px 20px;
+    background-color: #e08722;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Markering voor de huidige dag */
+.current-day {
+    background-color: #e08722; /* Oranje kleur voor de huidige dag */
+    color: white; /* Witte tekst voor contrast */
+    font-weight: bold; /* Maak de tekst vetgedrukt voor meer nadruk */
+}
+
+/* #e08722 */

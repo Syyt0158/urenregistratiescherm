@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const dayHeaders = document.querySelectorAll("th");
     const inputFields = document.querySelectorAll('table input[type="number"]');
     const goToTodayBtn = document.getElementById("go-to-today");
+    const prevWeekBtn = document.getElementById("prev-week");
+    const nextWeekBtn = document.getElementById("next-week");
     
     const currentDate = new Date();
     let currentMonday = getMondayOfWeek(currentDate);
@@ -75,12 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
         weekItem.addEventListener("click", function () {
             saveDataForWeek(currentWeek);
             currentWeek = parseInt(this.dataset.week);
-            selectedWeek.textContent = `Week ${currentWeek}`;
-            weekList.classList.remove("show");
-            arrow.classList.remove("rotate");
-            weekDates = getWeekDates(getMondayOfWeek(new Date(currentDate.getFullYear(), 0, 4 + (currentWeek - 1) * 7)));
-            updateDayHeaders(weekDates);
-            loadStoredData(currentWeek);
+            updateWeekView();
         });
         weekList.appendChild(weekItem);
     }
@@ -107,9 +104,26 @@ document.addEventListener("DOMContentLoaded", function () {
         saveDataForWeek(currentWeek);
         currentMonday = getMondayOfWeek(currentDate);
         currentWeek = getISOWeekNumber(currentDate);
+        updateWeekView();
+    });
+
+    prevWeekBtn.addEventListener("click", function () {
+        saveDataForWeek(currentWeek);
+        currentWeek = Math.max(1, currentWeek - 1);
+        updateWeekView();
+    });
+
+    nextWeekBtn.addEventListener("click", function () {
+        saveDataForWeek(currentWeek);
+        currentWeek = Math.min(52, currentWeek + 1);
+        updateWeekView();
+    });
+
+    function updateWeekView() {
         selectedWeek.textContent = `Week ${currentWeek}`;
-        weekDates = getWeekDates(currentMonday);
+        let newMonday = getMondayOfWeek(new Date(currentDate.getFullYear(), 0, 4 + (currentWeek - 1) * 7));
+        weekDates = getWeekDates(newMonday);
         updateDayHeaders(weekDates);
         loadStoredData(currentWeek);
-    });
+    }
 });

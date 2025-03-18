@@ -16,7 +16,9 @@
     <section>
         <h2>Urenregistratie</h2>
         <div class="button-container">
-            <button id="go-to-today" class="btn-go-today">Ga naar deze week</button>
+            <button id="prev-week" class="btn-week">&#9664;</button>
+            <button id="go-to-today" class="btn-go-today">Deze week</button>
+            <button id="next-week" class="btn-week">&#9654;</button>
         </div>
         <div class="week-selector">
             <button class="dropdown-btn">
@@ -26,8 +28,8 @@
             <ul class="dropdown-content" id="week-list"></ul>
         </div>
         
-        <tbody>
-            <table>
+        <table>
+            <thead>
                 <tr>
                     <th>Klant / Project</th>
                     <th></th>
@@ -38,9 +40,10 @@
                     <th></th>
                     <th></th>
                 </tr>
+            </thead>
+            <tbody>
                 <tr>
-                    <td class="klant"><strong>Bedrijf A</strong> <br> <span class="project">Project: Website
-                            Redesign</span></td>
+                    <td class="klant"><strong>Bedrijf A</strong> <br> <span class="project">Project: Website Redesign</span></td>
                     <td><input type="number" min="0" step="1"></td>
                     <td><input type="number" min="0" step="1"></td>
                     <td><input type="number" min="0" step="1"></td>
@@ -50,8 +53,7 @@
                     <td><input type="number" min="0" step="1"></td>
                 </tr>
                 <tr>
-                    <td class="klant"><strong>Bedrijf B</strong> <br> <span class="project">Project: App
-                            Ontwikkeling</span></td>
+                    <td class="klant"><strong>Bedrijf B</strong> <br> <span class="project">Project: App Ontwikkeling</span></td>
                     <td><input type="number" min="0" step="1"></td>
                     <td><input type="number" min="0" step="1"></td>
                     <td><input type="number" min="0" step="1"></td>
@@ -60,11 +62,9 @@
                     <td><input type="number" min="0" step="1"></td>
                     <td><input type="number" min="0" step="1"></td>
                 </tr>
-        </tbody>
+            </tbody>
         </table>
     </section>
-
-
 
     <script src="script.js"></script>
 </body>

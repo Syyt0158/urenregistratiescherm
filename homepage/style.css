@@ -142,11 +142,31 @@ tbody {
     border-radius: 5px;
 }
 
-/* Markering voor de huidige dag */
 .current-day {
-    background-color: #e08722; /* Oranje kleur voor de huidige dag */
-    color: white; /* Witte tekst voor contrast */
-    font-weight: bold; /* Maak de tekst vetgedrukt voor meer nadruk */
+    background-color: #e08722;
+    color: white;
+    font-weight: bold;
 }
 
+#prev-week {
+    padding: 8px 10px;
+    margin-right: 5px;
+    background-color: #e08722;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px; 
+}
+
+#next-week {
+    padding: 8px 10px;
+    margin-left: 5px;
+    background-color: #e08722;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px; 
+}
 /* #e08722 */

@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let weekDates = getWeekDates(currentMonday);
     updateDayHeaders(weekDates);
     loadStoredData(currentWeek);
+    updateGoToTodayButton();
 
     function getMondayOfWeek(date) {
         const day = date.getDay();
@@ -64,6 +65,23 @@ document.addEventListener("DOMContentLoaded", function () {
     function saveDataForWeek(weekNumber) {
         const hoursData = Array.from(inputFields).map(input => input.value ? parseInt(input.value) : null);
         localStorage.setItem(`week_${weekNumber}`, JSON.stringify(hoursData));
+    }
+
+    function updateGoToTodayButton() {
+        const today = new Date();
+        if (getISOWeekNumber(today) === currentWeek) {
+            goToTodayBtn.textContent = today.toLocaleDateString("nl-NL", {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            });
+        } else {
+            goToTodayBtn.textContent = currentMonday.toLocaleDateString("nl-NL", {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            });
+        }
     }
 
     for (let i = 1; i <= 52; i++) {
@@ -121,9 +139,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateWeekView() {
         selectedWeek.textContent = `Week ${currentWeek}`;
-        let newMonday = getMondayOfWeek(new Date(currentDate.getFullYear(), 0, 4 + (currentWeek - 1) * 7));
-        weekDates = getWeekDates(newMonday);
+        currentMonday = getMondayOfWeek(new Date(currentDate.getFullYear(), 0, 4 + (currentWeek - 1) * 7));
+        weekDates = getWeekDates(currentMonday);
         updateDayHeaders(weekDates);
         loadStoredData(currentWeek);
+        updateGoToTodayButton();
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const table = document.querySelector("table");
+    if (!table) return;
+
+    table.querySelector("thead tr").insertAdjacentHTML("beforeend", "<th>Tot.</th>");
+
+    const getWeek = () => document.getElementById("selected-week").textContent.split(" ")[1];
+
+    const updateTotal = (row) => {
+        const total = [...row.querySelectorAll('input[type="number"]')]
+            .reduce((sum, input) => sum + (parseInt(input.value) || 0), 0);
+        row.querySelector(".total-hours").textContent = total;
+        const totals = JSON.parse(localStorage.getItem(`totals_week_${getWeek()}`)) || {};
+        totals[row.dataset.index] = total;
+        localStorage.setItem(`totals_week_${getWeek()}`, JSON.stringify(totals));
+    };
+
+    const loadTotals = () => {
+        const totals = JSON.parse(localStorage.getItem(`totals_week_${getWeek()}`)) || {};
+        document.querySelectorAll("tbody tr").forEach((row, i) => {
+            row.dataset.index = i;
+            row.insertAdjacentHTML("beforeend", row.querySelector(".total-hours") ? "" : '<td class="total-hours">0</td>');
+            row.querySelector(".total-hours").textContent = totals[i] || 0;
+        });
+    };
+
+    document.querySelectorAll("tbody tr").forEach(row => {
+        row.insertAdjacentHTML("beforeend", '<td class="total-hours">0</td>');
+        row.querySelectorAll('input[type="number"]').forEach(input =>
+            input.addEventListener("input", () => updateTotal(row))
+        );
+    });
+
+    new MutationObserver(loadTotals).observe(document.getElementById("selected-week"), { childList: true });
+
+    loadTotals();
+});
+

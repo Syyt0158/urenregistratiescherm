@@ -1,3 +1,24 @@
+/* Algemene stijlen */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
 .logo {
     position: absolute;
     left: 0;
@@ -6,59 +27,61 @@
 }
 
 hr {
-    margin-top: 50px;
-}
-
-/* Tabelstijl */
-table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    border: none;
+    height: 2px;
+    background-color: #666;
+    margin: 20px 0;
+}
+
+/* Algemene transitie voor een soepel effect */
+* {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Knoppen stijl */
+.button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    top: 0;
+}
+
+.btn-go-today {
+    background-color: #e8891b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-week {
     background-color: #fff;
-    font-family: Arial, sans-serif;
-}
-
-th, td {
+    padding: 10px 15px;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 5px;
     border: 1px solid #ddd;
-    padding: 12px;
-    text-align: center;
+    transition: 0.3s;
 }
 
-.klant {
-    font-weight: bold;
-    text-align: left;
-    background-color: #f4f4f4;
-    padding-left: 10px;
-    width: 200px;
+.btn-go-today:hover, .btn-week:hover {
+    background-color: #c76c1b;
+    transform: scale(1.05);
 }
 
-.project {
-    font-style: italic;
-    font-size: 0.9em;
-    color: #666;
-}
-
-/* Invoervelden */
-input[type="number"] {
-    width: 50px;
-    padding: 5px;
-    text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-tbody {
-    background-color: #f9f9f9;
-}
-
-/* Week selector container */
+/* Dropdown menu */
 .week-selector {
     position: relative;
     display: inline-block;
     margin-bottom: 10px;
 }
 
-/* Stijl van de knop */
 .dropdown-btn {
     background-color: #fff;
     padding: 10px 15px;
@@ -68,11 +91,13 @@ tbody {
     display: flex;
     align-items: center;
     gap: 8px;
+    border: 1px solid #ddd;
+    transition: 0.3s;
 }
 
 .dropdown-btn:hover {
-    background-color: #e08722;
-
+    background-color: #e8891b;
+    color: white;
 }
 
 /* Pijlstijl */
@@ -80,7 +105,7 @@ tbody {
     transition: transform 0.3s ease;
 }
 
-/* Gedraaide pijl als open */
+/* Gedraaide pijl als dropdown open is */
 .rotate {
     transform: rotate(180deg);
 }
@@ -95,11 +120,14 @@ tbody {
     padding: 0;
     margin: 0;
     border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     max-height: 200px;
     overflow-y: auto;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-/* Scrollbalk */
 .dropdown-content::-webkit-scrollbar {
     width: 6px;
 }
@@ -113,60 +141,82 @@ tbody {
     padding: 10px;
     cursor: pointer;
     text-align: center;
-    transition: 0.2s;
+    transition: 0.1s;
 }
 
 .dropdown-content li:hover {
     background-color: #f4f4f4;
 }
 
-/* Laat de dropdown zien*/
+/* Toon dropdown wanneer actief */
 .show {
     display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px; /* Ruimte tussen de knop en de tabel */
+/* Tabelstijl */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
 }
 
-.btn-go-today {
-    padding: 10px 20px;
-    background-color: #e08722;
-    color: white;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
 }
 
-.current-day {
+th {
     background-color: #e08722;
     color: white;
     font-weight: bold;
 }
 
-#prev-week {
-    padding: 8px 10px;
-    margin-right: 5px;
-    background-color: #e08722;
-    color: white;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px; 
+.klant {
+    font-weight: bold;
+    text-align: left;
+    background-color: #fff3e0;
+    padding-left: 10px;
 }
 
-#next-week {
-    padding: 8px 10px;
-    margin-left: 5px;
-    background-color: #e08722;
-    color: white;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px; 
+.project {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #666;
 }
-/* #e08722 */
+
+/* Inputvelden */
+input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: 0.3s;
+}
+
+input[type="number"]:focus {
+    border-color: #e8891b;
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0px 0px 8px rgba(224, 135, 34, 0.5);
+}
+
+/* Huidige dag markering */
+.current-day {
+    background-color: #ffcc80 !important;
+    color: black !important;
+    font-weight: bold;
+}
+
+/* Tabelrij hover effect */
+tbody tr:hover {
+    background-color: rgba(224, 135, 34, 0.1);
+}

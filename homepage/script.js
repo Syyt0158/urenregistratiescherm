@@ -183,5 +183,12 @@ document.addEventListener("DOMContentLoaded", () => {
     new MutationObserver(loadTotals).observe(document.getElementById("selected-week"), { childList: true });
 
     loadTotals();
+    let projects = []
+    const token = localStorage.getItem('token')
+    const url = 'https://selinay.clockwise.info/api/v2/hourregistration/projects/week/202512'
+
+    fetch(url, { method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } })
+        .then((resp) => resp.json())
+        .then((resp) => projects = resp)
 });
 

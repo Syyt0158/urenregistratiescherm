@@ -89,10 +89,10 @@ Met deze combinatie van technologieën wordt een snelle, moderne en gebruiksvrie
 | 1 en 2 | Opzetten van HTML/CSS-structuur en basis JavaScript-functionaliteit |
 | 3 en 4 | Implementeren van kalenderweergave en urenregistratie functionaliteit |
 | 5 en 6 | Toevoegen van navigatie tussen weken en "Vandaag" knop |
-| 7 en 8 | Ontwikkelen van beheerpagina's voor klanten en projecten |
-| 9 en 10| Implementeren van totaal aantal uren per week en samenvatting |
-|11 en 12| Darkmode optie toevoegen (should-have) |
-|13 en 14| Integratie met Clockwise API voor inloggen en authenticatie |
+| 7 en 8 | Implementeren van totaal aantal uren per week en samenvatting |
+| 9 en 10| Integratie met Clockwise API voor inloggen en authenticatie |
+|11 en 12| Ontwikkelen van beheerpagina's voor klanten en projecten |
+|13 en 14| Darkmode optie toevoegen (should-have) |
 |   15   | Testen, optimaliseren en documenteren van de website |
 
 ## 4. Bewijs van Voortgangsbewaking

@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const goToTodayBtn = document.getElementById("go-to-today");
     const prevWeekBtn = document.getElementById("prev-week");
     const nextWeekBtn = document.getElementById("next-week");
-    
+    const tableBody = document.querySelector("tbody");
+
     const currentDate = new Date();
     let currentMonday = getMondayOfWeek(currentDate);
     let currentWeek = getISOWeekNumber(currentDate);
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     loadStoredData(currentWeek);
     updateGoToTodayButton();
 
+    // Helper functions
     function getMondayOfWeek(date) {
         const day = date.getDay();
         const diff = (day === 0 ? -6 : 1) - day;
@@ -84,6 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Week dropdown logic
     for (let i = 1; i <= 52; i++) {
         let weekItem = document.createElement("li");
         let startDate = getMondayOfWeek(new Date(currentDate.getFullYear(), 0, 4 + (i - 1) * 7));
@@ -145,50 +148,155 @@ document.addEventListener("DOMContentLoaded", function () {
         loadStoredData(currentWeek);
         updateGoToTodayButton();
     }
-});
 
-document.addEventListener("DOMContentLoaded", () => {
+    // Total column logic
     const table = document.querySelector("table");
-    if (!table) return;
+    if (table) {
+        table.querySelector("thead tr").insertAdjacentHTML("beforeend", "<th>Tot.</th>");
 
-    table.querySelector("thead tr").insertAdjacentHTML("beforeend", "<th>Tot.</th>");
+        const getWeek = () => document.getElementById("selected-week").textContent.split(" ")[1];
 
-    const getWeek = () => document.getElementById("selected-week").textContent.split(" ")[1];
-
-    const updateTotal = (row) => {
-        const total = [...row.querySelectorAll('input[type="number"]')]
-            .reduce((sum, input) => sum + (parseInt(input.value) || 0), 0);
-        row.querySelector(".total-hours").textContent = total;
-        const totals = JSON.parse(localStorage.getItem(`totals_week_${getWeek()}`)) || {};
-        totals[row.dataset.index] = total;
-        localStorage.setItem(`totals_week_${getWeek()}`, JSON.stringify(totals));
-    };
-
-    const loadTotals = () => {
-        const totals = JSON.parse(localStorage.getItem(`totals_week_${getWeek()}`)) || {};
-        document.querySelectorAll("tbody tr").forEach((row, i) => {
-            row.dataset.index = i;
-            row.insertAdjacentHTML("beforeend", row.querySelector(".total-hours") ? "" : '<td class="total-hours">0</td>');
-            row.querySelector(".total-hours").textContent = totals[i] || 0;
+        function updateTotal(row) {
+            const total = [...row.querySelectorAll('input[type="number"]')]
+                .reduce((sum, input) => sum + (parseInt(input.value) || 0), 0);
+            row.querySelector(".total-hours").textContent = total;
+        
+            // Sla de totalen en individuele uren correct op in localStorage
+            const weekKey = `week_data_${getWeek()}`;
+            const weekData = JSON.parse(localStorage.getItem(weekKey)) || {};
+            const rowIndex = row.dataset.index;
+            
+            weekData[rowIndex] = {
+                total: total,
+                hours: [...row.querySelectorAll('input[type="number"]')].map(input => input.value || "")
+            };
+        
+            localStorage.setItem(weekKey, JSON.stringify(weekData));
+        }
+        
+        function updateTotal(row) {
+            const total = [...row.querySelectorAll('input[type="number"]')]
+                .reduce((sum, input) => sum + (parseInt(input.value) || 0), 0);
+            row.querySelector(".total-hours").textContent = total;
+        
+            // Sla de totalen en individuele uren correct op in localStorage
+            const weekKey = `week_data_${getWeek()}`;
+            const weekData = JSON.parse(localStorage.getItem(weekKey)) || {};
+            const rowIndex = row.dataset.index;
+            
+            weekData[rowIndex] = {
+                total: total,
+                hours: [...row.querySelectorAll('input[type="number"]')].map(input => input.value || "")
+            };
+        
+            localStorage.setItem(weekKey, JSON.stringify(weekData));
+        }
+        
+        function loadTotals() {
+            const weekKey = `week_data_${getWeek()}`;
+            const weekData = JSON.parse(localStorage.getItem(weekKey)) || {};
+            document.querySelectorAll("tbody tr").forEach((row, i) => {
+                row.dataset.index = i;
+                if (!row.querySelector(".total-hours")) {
+                    row.insertAdjacentHTML("beforeend", '<td class="total-hours">0</td>');
+                }
+                row.querySelector(".total-hours").textContent = weekData[i]?.total || 0;
+                
+                // Herstel ingevoerde uren per dag
+                row.querySelectorAll('input[type="number"]').forEach((input, day) => {
+                    input.value = weekData[i]?.hours?.[day] || "";
+                });
+            });
+        }
+        
+        function resetTable() {
+            document.querySelectorAll("tbody tr").forEach(row => {
+                row.querySelectorAll('input[type="number"]').forEach(input => input.value = "");
+                row.querySelector(".total-hours").textContent = "0";
+            });
+        }
+        
+        function displayProjects(projects) {
+            projects.forEach((projectData, index) => {
+                const path = projectData.path || [];
+                const row = document.createElement("tr");
+                const klant = path.find(item => item.type === 'customer');
+                const project = path.find(item => item.type === 'project');
+        
+                row.innerHTML = `
+                    <td class="klant"><strong>${klant ? klant.name : 'Onbekend Klant'}</strong><br><span class="project">Project: ${project ? project.name : 'Onbekend Project'}</span></td>
+                    ${[...Array(7)].map((_, day) => `<td><input type="number" min="0" step="1" data-project="${index}" data-day="${day}" /></td>`).join('')}
+                    <td class="total-hours">0</td>
+                `;
+        
+                tableBody.appendChild(row);
+        
+                // Voeg event listeners toe voor de inputs om totalen direct bij te werken
+                row.querySelectorAll('input[type="number"]').forEach(input =>
+                    input.addEventListener("input", () => updateTotal(row))
+                );
+            });
+        
+            // Zorg ervoor dat alle rijen correct worden geladen, inclusief de onderste rij
+            loadTotals();
+        }
+        
+        // Zorg ervoor dat de gegevens correct worden geladen bij het wisselen van weken
+        new MutationObserver(() => {
+            loadTotals();
+        }).observe(document.getElementById("selected-week"), { childList: true });
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            loadTotals();
         });
-    };
+        
+    }
 
-    document.querySelectorAll("tbody tr").forEach(row => {
-        row.insertAdjacentHTML("beforeend", '<td class="total-hours">0</td>');
-        row.querySelectorAll('input[type="number"]').forEach(input =>
-            input.addEventListener("input", () => updateTotal(row))
-        );
-    });
+    // Fetch API logic (voor projectdata)
+    let projects = [];
+    const token = localStorage.getItem('token');
+    const url = 'https://selinay.clockwise.info/api/v2/hourregistration/projects/week/202512';
 
-    new MutationObserver(loadTotals).observe(document.getElementById("selected-week"), { childList: true });
+    if (token) {
+        console.log("Fetching data from API...");
 
-    loadTotals();
-    let projects = []
-    const token = localStorage.getItem('token')
-    const url = 'https://selinay.clockwise.info/api/v2/hourregistration/projects/week/202512'
+        fetch(url, { method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } })
+            .then((resp) => resp.json())
+            .then((data) => {
+                console.log("API Response:", data);
+                projects = data;
+                
+                // Toon de projecten op de pagina
+                displayProjects(projects);  // Functie aanroepen om de projecten weer te geven
+            })
+            .catch((error) => console.error("Fetch error:", error));
+    } else {
+        console.log("No token found");
+    }
 
-    fetch(url, { method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } })
-        .then((resp) => resp.json())
-        .then((resp) => projects = resp)
+    // Functie om de projecten in de HTML weer te geven
+    function displayProjects(projects) {
+        projects.forEach((projectData, index) => {
+            const path = projectData.path || [];
+
+            // Voeg klanten en projecten toe aan de lijst op basis van hun niveau
+            const row = document.createElement("tr");
+            const klant = path.find(item => item.type === 'customer');
+            const project = path.find(item => item.type === 'project');
+
+            row.innerHTML = `
+                <td class="klant"><strong>${klant ? klant.name : 'Onbekend Klant'}</strong><br><span class="project">Project: ${project ? project.name : 'Onbekend Project'}</span></td>
+                <td><input type="number" min="0" step="1" data-project="${index}" data-day="0" /></td>
+                <td><input type="number" min="0" step="1" data-project="${index}" data-day="1" /></td>
+                <td><input type="number" min="0" step="1" data-project="${index}" data-day="2" /></td>
+                <td><input type="number" min="0" step="1" data-project="${index}" data-day="3" /></td>
+                <td><input type="number" min="0" step="1" data-project="${index}" data-day="4" /></td>
+                <td><input type="number" min="0" step="1" data-project="${index}" data-day="5" /></td>
+                <td><input type="number" min="0" step="1" data-project="${index}" data-day="6" /></td>
+                <td class="total-hours">0</td>
+            `;
+
+            tableBody.appendChild(row);
+        });
+    }
 });
-

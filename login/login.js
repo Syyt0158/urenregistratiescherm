@@ -61,3 +61,4 @@ document.getElementById("password").addEventListener("keydown", function(event) 
         login();
     }
 });
+// /api/v2/hourregistration/projects/week/202507

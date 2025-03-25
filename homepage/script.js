@@ -155,24 +155,6 @@ document.addEventListener("DOMContentLoaded", function () {
         table.querySelector("thead tr").insertAdjacentHTML("beforeend", "<th>Tot.</th>");
 
         const getWeek = () => document.getElementById("selected-week").textContent.split(" ")[1];
-
-        function updateTotal(row) {
-            const total = [...row.querySelectorAll('input[type="number"]')]
-                .reduce((sum, input) => sum + (parseInt(input.value) || 0), 0);
-            row.querySelector(".total-hours").textContent = total;
-        
-            // Sla de totalen en individuele uren correct op in localStorage
-            const weekKey = `week_data_${getWeek()}`;
-            const weekData = JSON.parse(localStorage.getItem(weekKey)) || {};
-            const rowIndex = row.dataset.index;
-            
-            weekData[rowIndex] = {
-                total: total,
-                hours: [...row.querySelectorAll('input[type="number"]')].map(input => input.value || "")
-            };
-        
-            localStorage.setItem(weekKey, JSON.stringify(weekData));
-        }
         
         function updateTotal(row) {
             const total = [...row.querySelectorAll('input[type="number"]')]
@@ -202,7 +184,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 row.querySelector(".total-hours").textContent = weekData[i]?.total || 0;
                 
-                // Herstel ingevoerde uren per dag
                 row.querySelectorAll('input[type="number"]').forEach((input, day) => {
                     input.value = weekData[i]?.hours?.[day] || "";
                 });

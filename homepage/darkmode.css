@@ -1,0 +1,120 @@
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode table {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dark-mode th {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    padding: 10px;
+    border-bottom: 2px solid #444;
+    text-align: left;
+}
+
+.dark-mode tr:nth-child(even) { background-color: #252525; }
+.dark-mode tr:nth-child(odd) { background-color: #1b1b1b; }
+
+.dark-mode td, 
+.dark-mode table input,
+.dark-mode input[type="number"],
+.dark-mode input[type="text"],
+.dark-mode input[type="email"],
+.dark-mode input[type="password"] {
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #555;
+    padding: 8px;
+}
+
+.dark-mode input:focus {
+    border-color: #e8891b;
+    outline: none;
+    background-color: #444;
+}
+
+.dark-mode input[type="number"]::-webkit-inner-spin-button,
+.dark-mode input[type="number"]::-webkit-outer-spin-button {
+    background: transparent;
+    filter: invert(1);
+    appearance: none;
+}
+
+.dark-mode .klant { background-color: #2a2a2a; }
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: relative;
+}
+
+.btn-logout, .btn-darkmode {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-logout {
+    background: gray;
+    color: white;
+    margin-left: 10px;
+    padding: 10px 15px;
+}
+
+.btn-logout:hover { background: #e8891b; }
+
+.btn-darkmode {
+    background: #34495e;
+    color: white;
+    width: 40px;
+}
+
+.btn-darkmode i { font-size: 18px; }
+
+.btn-darkmode:hover { background: #1a252f; }
+
+.dark-mode .btn-darkmode {
+    background: #e8891b;
+}
+
+.dark-mode .btn-darkmode:hover {
+    background: #ef9c3d;
+}
+
+.logo { width: 150px; transition: filter 0.3s ease-in-out; }
+
+.dark-mode .logo {
+    content: url("https://clockwise.info/assets/images/logo/alleen_logo.svg");
+}
+
+.dark-mode #week-list, .dark-mode .dropdown-btn {
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    border: 1px solid #555;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode #week-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dark-mode #week-list li:hover, .dark-mode .dropdown-btn:hover {
+    background-color: #444;
+}

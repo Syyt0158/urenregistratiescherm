@@ -63,7 +63,7 @@ header {
 }
 
 .btn-go-today:hover, .btn-week:hover {
-    background-color: #c76c1b;
+    background-color: #e8891b;
     transform: scale(1.05);
 }
 
@@ -190,7 +190,7 @@ input[type="number"] {
     text-align: center;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #f9f9f9;
+    background-color: #f9f9f9;  
     transition: 0.3s;
 }
 

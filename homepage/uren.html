@@ -4,15 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>Urenregistratie</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="darkmode.css">
 </head>
 
 <body>
     <header>
-        <img class="logo" src="https://clockwise.info/assets/images/logo/zwarte_letters.svg" alt="logo">
+        <img class="logo" src="https://clockwise.info/assets/images/logo/zwarte_letters@2x.png" alt="logo">
+        <button id="dark-mode-toggle" class="btn-darkmode">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+        <button id="logout-button" class="btn-logout">Uitloggen</button>
     </header>
-    <hr>
+    
+    
     <section>
         <h2>Urenregistratie</h2>
         <div class="button-container">
@@ -47,7 +54,7 @@
     </section>
     <div id="projects-container"></div>
 
-    <script src="script.js"></script> 
+    <script type="module" src="./script.js"></script>
 </body>
 
 </html>

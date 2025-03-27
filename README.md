@@ -3,8 +3,6 @@
 ## Introductie
 In dit project wordt een urenregistratiesysteem ontwikkeld met behulp van HTML, CSS en JavaScript. Dit systeem is bedoeld om gebruikers een eenvoudige en efficiënte manier te bieden om gewerkte uren te registreren. Het project richt zich op een intuïtieve interface, waarbij gebruikers gemakkelijk gegevens kunnen invoeren en beheren. Daarnaast biedt het systeem een kalenderweergave, waarmee gebruikers snel kunnen navigeren tussen verschillende weken.
 
-Een belangrijk aspect van het project is de flexibiliteit in het toevoegen van klanten en projecten. In plaats van een aparte beheerpagina kunnen gebruikers direct vanuit de kalender een nieuwe klant toevoegen door op een plusicoon te klikken. Dit bespaart tijd en zorgt voor een naadloze workflow.
-
 ## Projectdoel
 Het doel van dit project is om een gebruiksvriendelijk en efficiënt urenregistratiesysteem te ontwikkelen, waarin de volgende aspecten centraal staan:
 
@@ -48,36 +46,32 @@ Met deze combinatie van technologieën wordt een snelle, moderne en gebruiksvrie
      - Een kalenderweergave waar gebruikers hun uren per dag kunnen invoeren.
      - Mogelijkheid om uren toe te voegen, aan te passen en te verwijderen.
 
-2. **Als gebruiker wil ik in staat zijn om klanten en projecten te beheren** zodat ik mijn werk correct kan categoriseren.
-   - **Acceptatiecriteria:**
-     - Een plusknop naast de kalender waarmee gebruikers eenvoudig een nieuwe klant kunnen toevoegen.
-
-3. **Als gebruiker wil ik kunnen inloggen met mijn Clockwise account** zodat ik toegang heb tot mijn urenregistratie.
+2. **Als gebruiker wil ik kunnen inloggen met mijn Clockwise account** zodat ik toegang heb tot mijn urenregistratie.
    - **Acceptatiecriteria:**
      - Een inlogpagina die gebruikers authenticatie biedt via de Clockwise API.
      - Beveiligde toegang tot de urenregistratiepagina's.
 
-4. **Als gebruiker wil ik een overzicht zien van mijn totaal aantal uren per week** zodat ik mijn voortgang kan monitoren.
+3. **Als gebruiker wil ik een overzicht zien van mijn totaal aantal uren per week** zodat ik mijn voortgang kan monitoren.
    - **Acceptatiecriteria:**
      - Een samenvatting onderaan de urenregistratiepagina die het totaal aantal uren per week weergeeft.
 
-5. **Als gebruiker wil ik kunnen wisselen tussen verschillende weken** zodat ik mijn uren van eerdere weken kan bekijken en bewerken.
+4. **Als gebruiker wil ik kunnen wisselen tussen verschillende weken** zodat ik mijn uren van eerdere weken kan bekijken en bewerken.
    - **Acceptatiecriteria:**
      - Navigatie-opties om tussen weken te schakelen (bijv. week 1, week 2).
      - Mogelijkheid om uren van verschillende weken apart te bekijken en bij te werken.
 
-6. **Als gebruiker wil ik een knop hebben om naar vandaag te navigeren** zodat ik snel kan zien welke dag het vandaag is.
+5. **Als gebruiker wil ik een knop hebben om naar vandaag te navigeren** zodat ik snel kan zien welke dag het vandaag is.
    - **Acceptatiecriteria:**
      - Een "Vandaag" knop die de gebruiker direct naar de huidige dag in de kalender navigeert en deze markeert.
 
 ### Should-Have
-7. **Als gebruiker wil ik een donkere modus kunnen inschakelen** zodat ik prettiger kan werken in donkere omgevingen
+6. **Als gebruiker wil ik een donkere modus kunnen inschakelen** zodat ik prettiger kan werken in donkere omgevingen
    - **Acceptatiecriteria:**
      - Een knop waarmee de gebruiker kan schakelen tussen lichte en donkere modus.
      - De keuze wordt onthouden voor toekomstige sessies.
 
 ### Could-Have
-8. **Als gebruiker wil ik mijn uren zowel handmatig kunnen invoeren als met pijltjestoetsen kunnen aanpassen** zodat ik sneller en gemakkelijker mijn uren kan registreren.
+7. **Als gebruiker wil ik mijn uren zowel handmatig kunnen invoeren als met pijltjestoetsen kunnen aanpassen** zodat ik sneller en gemakkelijker mijn uren kan registreren.
    - **Acceptatiecriteria:**
      - Gebruikers kunnen uren direct typen in het invoerveld.
      - Met de pijltjestoetsen ↑ en ↓ kunnen uren in kleine stappen verhoogd of verlaagd worden.
@@ -91,9 +85,8 @@ Met deze combinatie van technologieën wordt een snelle, moderne en gebruiksvrie
 | 5 en 6 | Toevoegen van navigatie tussen weken en "Vandaag" knop |
 | 7 en 8 | Implementeren van totaal aantal uren per week en samenvatting |
 | 9 en 10| Integratie met Clockwise API voor inloggen en authenticatie |
-|11 en 12| Ontwikkelen van beheerpagina's voor klanten en projecten |
-|13 en 14| Darkmode optie toevoegen (should-have) |
-|   15   | Testen, optimaliseren en documenteren van de website |
+|11 en 12| Darkmode optie toevoegen (should-have) |
+|   13   | Testen, optimaliseren en documenteren van de website |
 
 ## 4. Bewijs van Voortgangsbewaking
 Tijdens het project zal de voortgang worden bijgehouden via:
